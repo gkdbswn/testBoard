@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: board_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  backend:
+    build: ./board_backend
+    container_name: testboard-backend-1
+    restart: always  # <-- 이게 있으면 자기가 죽어도 DB 켜질 때까지 계속 부활합니다!
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./board_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./board_frontend:/app
+      # 컨테이너 안의 라이브러리 폴더를 보호하는 장치입니다.
+      - /app/node_modules
+    stdin_open: true
