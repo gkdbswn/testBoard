@@ -1,0 +1,9 @@
+### 게시글 저장 테스트
+POST http://localhost:8080/api/board/save
+Content-Type: application/json
+
+{
+  "title": "맥북 정복 성공",
+  "content": "윈도우에서 옮겨온 프로젝트가 드디어 DB에 저장됩니다!",
+  "author": "본인성함"
+}
