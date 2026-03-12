@@ -17,9 +17,6 @@ public class Board {
     private String title;
     private String content;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
-    private int hits;
-
     @Builder
     public Board(String author,String title,String content){
         this.author = author;
@@ -27,9 +24,19 @@ public class Board {
         this.content = content;
     }
 
+
+
     public void update(String title, String content){
         this.title = title;
         this.content = content;
+    }
+
+    //게시글 조회수 증가를 위한 저장공간
+    private Long countVisit = 0L;
+
+    //조회수 증가
+    public void updateVisit(Long currentVisit){
+        this.countVisit = (currentVisit==null ? 0L : currentVisit) +1L;
     }
 
 }

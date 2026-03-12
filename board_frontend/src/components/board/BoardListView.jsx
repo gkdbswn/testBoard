@@ -5,6 +5,10 @@ function BoardListView({ list, totalPage, BoardList, checkElement, delChePost })
     return (<>
 
         <div className="board">
+            <div className="search_Box">검색
+                <input/>
+                <button>완료</button>
+            </div>
             <h2>게시글 목록</h2>
             <table className="board-table">
                 <thead>

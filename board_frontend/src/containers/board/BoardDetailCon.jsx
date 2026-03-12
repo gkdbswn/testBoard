@@ -7,6 +7,7 @@ function BoardDetailCon() {
     const [oneList, setOneList] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
+    const [searchContent,setSearchContent] = useState("");
 
     const getOneList = async () => {
         try {

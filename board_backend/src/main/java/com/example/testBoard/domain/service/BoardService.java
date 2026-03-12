@@ -17,6 +17,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    //게시글 저장
     public void savePost(BoardRequestDto boardRequestDto){
         Board board = Board.builder()
                 .title(boardRequestDto.getTitle())
@@ -29,14 +30,6 @@ public class BoardService {
     public Page<Board> getList(Pageable pageable){
         return boardRepository.findAll(pageable);
     }
-
-//    @Transactional
-//    public Board getOneList(Long id){
-//        boardRepository.updateHits(id);
-//
-//        return boardRepository.findById(id)
-//                .orElse(null);
-//    }
 
     @Transactional
     public Board updatePost (Long id, BoardRequestDto boardRequestDto) {
@@ -59,6 +52,22 @@ public class BoardService {
             return;
         }
         boardRepository.deleteAllByIdInBatch(ids);
+    }
+
+    //게시글 조회수 증가 메서드
+    @Transactional
+   public Board getBoardVisit(Long id){
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("게시글이 없습니다"));
+
+        board.updateVisit(board.getCountVisit());
+        return board;
+    }
+
+    // title 검색 기능 메서드
+    public List<Board> getSearchList (String searchtitle) {
+        return boardRepository.findByTitleContaining(searchtitle);
+
     }
 
 }

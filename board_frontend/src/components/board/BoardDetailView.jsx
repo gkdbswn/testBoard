@@ -4,8 +4,9 @@ function BoardDetailView({ oneList, deleteOnePost, onUpdate }) {
     return (<>
         {oneList ? (
             <div>
-                 <p>제목 : {oneList.title}</p>
-                 <p>작성자 : {oneList.author}</p>
+                <p>조회수 : {oneList.countVisit}</p>
+                <p>제목 : {oneList.title}</p>
+                <p>작성자 : {oneList.author}</p>
                 <p>내용 : {oneList.content}</p>
                 <button onClick={deleteOnePost}>삭제</button>
                 <button onClick={onUpdate}>수정</button>

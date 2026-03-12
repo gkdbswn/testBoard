@@ -31,10 +31,6 @@ public class BoardController {
         return boardService.getList(pageable);
     }
 
-//    @GetMapping("{id}")
-//    public Board getOneList(@PathVariable Long id){
-//        return boardService.getOneList(id);
-//    }
 
     @PutMapping("/update/{id}")
     public Board updatePost(@PathVariable Long id, @Valid @RequestBody BoardRequestDto boardRequestDto){
@@ -53,5 +49,15 @@ public class BoardController {
         System.out.println("ids값들:"+ids);
         boardService.deletePost(ids);
     }
+
+    @GetMapping("/{id}")
+    public Board getOneDetail(@PathVariable Long id){
+        return boardService.getBoardVisit(id);
+    }
+
+//    @GetMapping("/search-title")
+//    public List<Board> getSearchList(@RequestParam("") String searchTitle){
+//        return boardService.getSearchList(searchTitle);
+//    }
 
 }
